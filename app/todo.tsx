@@ -22,12 +22,11 @@ const STORAGE_KEY = "@tasks";
 export default function App() {
   const [task, setTask] = useState<string>("");
   const [tasks, setTasks] = useState<Task[]>([
-    { id: "1", text: "Buy groceries", completed: false },
-    { id: "2", text: "Finish homework", completed: false },
-    { id: "3", text: "Call mom", completed: false },
+    { id: "1", text: "Task 1", completed: false },
+    { id: "2", text: "Task 2", completed: false },
+    { id: "3", text: "Task 3", completed: false },
   ]);
 
-  // Load tasks from storage on mount
   useEffect(() => {
     const loadTasks = async () => {
       try {
@@ -42,7 +41,6 @@ export default function App() {
     loadTasks();
   }, []);
 
-  // Save tasks to storage
   const saveTasks = async (newTasks: Task[]) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newTasks));
