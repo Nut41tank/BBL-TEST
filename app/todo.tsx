@@ -8,7 +8,6 @@ import {
   IconButton,
   List,
   MD2Colors,
-  Provider as PaperProvider,
   TextInput,
 } from "react-native-paper";
 import { useTasks } from "./hook/useTasks";
@@ -43,48 +42,46 @@ export default function App() {
   );
 
   return (
-    <PaperProvider>
-      <View style={styles.container}>
-        <Appbar.Header>
-          <Appbar.Content title="To-Do List" titleStyle={styles.headerTitle} />
-        </Appbar.Header>
-        {isLoading ? (
-          <ActivityIndicator
-            animating={true}
-            color={MD2Colors.red800}
-            size="large"
-          />
-        ) : (
-          <>
-            <View style={styles.inputContainer}>
-              <TextInput
-                label="Add a task"
-                value={task}
-                onChangeText={setTask}
-                style={styles.input}
-                mode="outlined"
-              />
-              <Button
-                mode="contained"
-                onPress={() => {
-                  addTask(task);
-                  setTask("");
-                }}
-                style={styles.addButton}
-              >
-                Add
-              </Button>
-            </View>
-            <FlatList
-              data={tasks}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.id}
-              style={styles.list}
+    <View style={styles.container}>
+      <Appbar.Header>
+        <Appbar.Content title="To-Do List" titleStyle={styles.headerTitle} />
+      </Appbar.Header>
+      {isLoading ? (
+        <ActivityIndicator
+          animating={true}
+          color={MD2Colors.red800}
+          size="large"
+        />
+      ) : (
+        <>
+          <View style={styles.inputContainer}>
+            <TextInput
+              label="Add a task"
+              value={task}
+              onChangeText={setTask}
+              style={styles.input}
+              mode="outlined"
             />
-          </>
-        )}
-      </View>
-    </PaperProvider>
+            <Button
+              mode="contained"
+              onPress={() => {
+                addTask(task);
+                setTask("");
+              }}
+              style={styles.addButton}
+            >
+              Add
+            </Button>
+          </View>
+          <FlatList
+            data={tasks}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            style={styles.list}
+          />
+        </>
+      )}
+    </View>
   );
 }
 
